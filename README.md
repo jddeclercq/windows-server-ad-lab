@@ -15,17 +15,7 @@ A small company network built from scratch on **Hyper-V**: a **Windows Server 20
 
 ## Architecture
 
-```mermaid
-flowchart LR
-    subgraph HV["Hyper-V host"]
-        DC["DC01<br/>Windows Server 2019<br/>AD DS · DNS · DHCP · File shares"]
-        CL["CLIENT01<br/>Windows 11<br/>joined to lab.local"]
-    end
-    CL -- "DHCP lease, DNS queries,<br/>Kerberos sign-in, GPOs" --> DC
-    CL -- "mapped drives (SMB)" --> DC
-    DC -- "DNS forwarders" --> FW["Sophos firewall"]
-    FW --> Internet([Internet])
-```
+![Diagram](diagrams/diagram-1.png)
 
 ## What I built
 
@@ -48,16 +38,7 @@ flowchart LR
 - Created **user accounts**, including **LabUser1**, and **security groups** per department.
 - Gave access to **groups rather than individual users**, so a new starter only needs to be added to the right group.
 
-```mermaid
-flowchart TD
-    D["lab.local"] --> L["OU: Lab"]
-    L --> U["OU: Users"]
-    L --> C["OU: Computers"]
-    L --> G["OU: Groups"]
-    U --> IT["OU: IT"]
-    U --> HR["OU: HR"]
-    U --> PR["OU: Projects"]
-```
+![Diagram](diagrams/diagram-2.png)
 
 ### 5. File shares and permissions
 - Created a main share called **Lab** with four department folders: **Projects, IT, Company and HR**.
